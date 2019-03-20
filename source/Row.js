@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
   },
   row: {
-    flex: 1,
     flexDirection: 'row',
     padding: 2,
     justifyContent: 'space-between',

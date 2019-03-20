@@ -2,6 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View, StyleSheet } from 'react-native';
 
+const styles = StyleSheet.create({
+  verticalList: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'stretch',
+  },
+});
+
 export const List = (props) => {
   const { items, itemRenderer, emptyRenderer, style, children } = props;
   let content;
@@ -53,11 +61,3 @@ export const VerticalList = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  verticalList: {
-    flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'stretch',
-  },
-});
