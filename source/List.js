@@ -10,12 +10,15 @@ const styles = StyleSheet.create({
   },
 });
 
-export const List = (props) => {
-  const { items, itemRenderer, emptyRenderer, style, children } = props;
+export const List = ({ items, filter, itemRenderer, emptyRenderer, children }) => {
   let content;
 
   if (items && items.length) {
-    content = items.map(itemRenderer);
+    if (filter) {
+      content = items.filter(filter).map(itemRenderer);
+    } else {
+      content = items.map(itemRenderer);
+    }
   } else {
     content = emptyRenderer();
   }
@@ -32,10 +35,12 @@ List.propTypes = {
   items: PropTypes.array,
   itemRenderer: PropTypes.func.isRequired,
   emptyRenderer: PropTypes.func,
+  filter: PropTypes.func,
   children: PropTypes.node,
 };
 
 List.defaultProps = {
+  filter: undefined,
   items: undefined,
   children: undefined,
   emptyRenderer: () => null,
@@ -45,17 +50,14 @@ export const VerticalList = ({
   items,
   itemRenderer,
   emptyRenderer,
+  filter,
   style,
   children,
   ...props
 }) => {
   return (
     <View {...props} style={[styles.verticalList, style]}>
-      <List
-        items={items}
-        itemRenderer={itemRenderer}
-        emptyRenderer={emptyRenderer}
-      >
+      <List items={items} itemRenderer={itemRenderer} emptyRenderer={emptyRenderer} filter={filter}>
         {children}
       </List>
     </View>
